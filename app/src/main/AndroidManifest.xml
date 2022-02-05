@@ -10,6 +10,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quizdroid">
         <activity
+            android:name=".Fourth_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Third_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Third_Aciivity"
+            android:exported="false"
+            android:label="@string/title_activity_third_aciivity"
+            android:theme="@style/Theme.Quizdroid.NoActionBar" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.Quizdroid.NoActionBar" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".QuestionPage"
+            android:exported="false" />
+        <activity
+            android:name=".Second_Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
