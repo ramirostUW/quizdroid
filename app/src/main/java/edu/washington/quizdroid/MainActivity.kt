@@ -40,6 +40,7 @@ import android.view.ViewGroup
             button.setOnClickListener {
                 val intent = Intent(this, Second_Activity::class.java)
                 intent.putExtra("topic", currentTopic)
+                intent.flags = intent.flags or Intent.FLAG_ACTIVITY_NO_HISTORY
                 startActivity(intent)
                 //Launch second activity
             }

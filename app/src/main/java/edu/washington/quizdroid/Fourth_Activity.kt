@@ -29,8 +29,8 @@ class Fourth_Activity : AppCompatActivity() {
 
         if(correctAnswer.equals(userAnswer)) {
             correctSoFar += 1;
-            (findViewById(R.id.correctAnswerLabel) as TextView).visibility = View.INVISIBLE
-            correctAnswerDisplay.text = "You got it right!"
+            /*(findViewById(R.id.correctAnswerLabel) as TextView).visibility = View.INVISIBLE
+            correctAnswerDisplay.text = "You got it right!"*/
         }
 
         val gradeDisplay = findViewById(R.id.currentGrade) as TextView

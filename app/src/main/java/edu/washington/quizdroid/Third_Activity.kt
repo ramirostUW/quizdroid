@@ -50,6 +50,7 @@ class Third_Activity : AppCompatActivity() {
                 questionToDisplay[questionToDisplay["correctAnswer"]])
             toAnswerPage.putExtra("isLastQuestion",
                 questionToDisplay["maxQuestions"].equals("" + currentQuestion))
+            toAnswerPage.flags = toAnswerPage.flags or Intent.FLAG_ACTIVITY_NO_HISTORY
             startActivity(toAnswerPage)
             //Launch second activity
         }
