@@ -16,7 +16,7 @@ import android.view.ViewGroup
 
 
     class MainActivity : AppCompatActivity() {
-
+    //val app = this.application as QuizApp
     val myTopics = arrayOf("Math", "Physics", "Marvel SuperHeroes")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
