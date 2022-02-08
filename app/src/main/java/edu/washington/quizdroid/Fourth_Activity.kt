@@ -6,18 +6,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import edu.washington.quizdroid.repository.Quiz
+import edu.washington.quizdroid.repository.Topic
 
 class Fourth_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fourth)
+        val app = this.application as QuizApp
 
-        val myTopic = intent.getStringExtra("topic").toString()
-        val currentQuestion = intent.getIntExtra("currentQuestion", -1).toInt()
-        var correctSoFar = intent.getIntExtra("correctSoFar", -1).toInt()
-        val correctAnswer = intent.getStringExtra("correctAnswer").toString()
-        val userAnswer = intent.getStringExtra("userAnswer").toString()
-        val isLastQuestion = intent.getBooleanExtra("isLastQuestion", true)
+        val currentQuestion = (this.application as QuizApp).currentQuestion as Quiz
+        var correctSoFar = app.correctSoFar
+        val correctAnswer = currentQuestion.answers.get(currentQuestion.correctAnswer)//intent.getStringExtra("correctAnswer").toString()
+        val userAnswer = app.userAnswer
+        val isLastQuestion = (!(app.quizIterator as Iterator<Quiz>).hasNext())
 
         val button = findViewById(R.id.nextQuestion) as Button
 
@@ -29,17 +31,15 @@ class Fourth_Activity : AppCompatActivity() {
 
         if(correctAnswer.equals(userAnswer)) {
             correctSoFar += 1;
-            /*(findViewById(R.id.correctAnswerLabel) as TextView).visibility = View.INVISIBLE
-            correctAnswerDisplay.text = "You got it right!"*/
+            app.correctSoFar +=1;
         }
 
         val gradeDisplay = findViewById(R.id.currentGrade) as TextView
-        gradeDisplay.text = "You have " + correctSoFar + " out of " + currentQuestion + " correct."
+        gradeDisplay.text = "You have " + correctSoFar + " out of " +
+                ((app.currentTopic as Topic).questions.indexOf(currentQuestion) + 1)+
+                " correct."
         if(!isLastQuestion) { button.setOnClickListener {
             val toQuestionPage = Intent(this, Third_Activity::class.java)
-            toQuestionPage.putExtra("topic", myTopic)
-            toQuestionPage.putExtra("correctSoFar", correctSoFar)
-            toQuestionPage.putExtra("currentQuestion", currentQuestion + 1)
             startActivity(toQuestionPage)
             //Launch second activity
 

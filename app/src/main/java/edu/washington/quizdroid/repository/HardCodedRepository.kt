@@ -5,27 +5,27 @@ class HardCodedRepository() : TopicRepository {
     private fun initializeRepositoryOnInit() : List<Topic> {
         var physicsQ1 = Quiz("If Force is 6 Newtons, and mass is 3 kg, " +
                 "acceleration is _ m/s^2.",
-        listOf("one", "two", "three", "four"), 2)
+        listOf("one", "two", "three", "four"), 1)
         var physicsQ2 = Quiz("If Force is 9 Newtons, and mass is 3 kg, " +
                 "acceleration is _ m/s^2.",
-            listOf("one", "two", "three", "four"), 3)
+            listOf("one", "two", "three", "four"), 2)
         var physicsQ3 = Quiz("If Force is 12 Newtons, and mass is 3 kg, " +
                 "acceleration is _ m/s^2.",
-            listOf("one", "two", "three", "four"), 4)
+            listOf("one", "two", "three", "four"), 3)
 
         var mathQ1 = Quiz("What is 1 + 1?",
-            listOf("one", "two", "three", "four"), 2)
+            listOf("one", "two", "three", "four"), 1)
         var mathQ2 = Quiz("What is the answer to 2 + 1?",
-            listOf("one", "two", "three", "four"), 3)
+            listOf("one", "two", "three", "four"), 2)
         var mathQ3 = Quiz("Why don't you tell me what is 3 + 1?",
-            listOf("one", "two", "three", "four"), 4)
+            listOf("one", "two", "three", "four"), 3)
 
         var marvelQ1 = Quiz("How many Guardians of the Galaxy movies have been released?",
-            listOf("one", "two", "three", "four"), 2)
+            listOf("one", "two", "three", "four"), 1)
         var marvelQ2 = Quiz("How many Spiderman movies are in the MCU?",
-            listOf("one", "two", "three", "four"), 3)
+            listOf("one", "two", "three", "four"), 2)
         var marvelQ3 = Quiz("How many Avengers movies have been released?",
-            listOf("one", "two", "three", "four"), 4)
+            listOf("one", "two", "three", "four"), 3)
 
         var mathTopic = Topic("Math", "Take our math quiz to see if " +
                 "your Math Skills add up!",
