@@ -6,20 +6,16 @@ import edu.washington.quizdroid.repository.HardCodedRepository
 import edu.washington.quizdroid.repository.Quiz
 import edu.washington.quizdroid.repository.Topic
 
-class QuizApp : Application() {
-    val myRepository = createRepository();
-    var quizIterator : Iterator<Quiz>? = null;
-    var currentQuestion: Quiz? = null;
-    var userAnswer: String? = null;
-    var currentTopic: Topic? = null;
-    var correctSoFar = -1;
+public class QuizApp : Application() {
+    public val myRepository = HardCodedRepository();
+    public var quizIterator : Iterator<Quiz>? = null;
+    public var currentQuestion: Quiz? = null;
+    public var userAnswer: String? = null;
+    public var currentTopic: Topic? = null;
+    public var correctSoFar = -1;
 
-    override fun onCreate() {
+    public override fun onCreate() {
         super.onCreate()
         Log.i("QuizApp", "OnStart event fired")
-    }
-
-    private fun createRepository(): HardCodedRepository{
-        return HardCodedRepository();
     }
 }
