@@ -1,28 +1,76 @@
-    package edu.washington.quizdroid
+package edu.washington.quizdroid
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.os.Environment
+import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginTop
-import java.net.URI
-import android.util.TypedValue
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import edu.washington.quizdroid.repository.JSONRepository
+import java.io.File
+import java.io.FileReader
 
 
-    class MainActivity : AppCompatActivity() {
-    //val myTopics = arrayOf("Math", "Physics", "Marvel SuperHeroes")
+class MainActivity : AppCompatActivity() {
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Log.i("Permission: ", "Granted")
+            } else {
+                Log.i("Permission: ", "Denied")
+            }
+        }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
+        /*
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) ==
+            PackageManager.PERMISSION_GRANTED) {
+            Log.i("PermsPopup", "Perms granted")
+            doFileStuff()
+        } else {
+            Log.i("Hopium", "give me rent")
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),0)
+        }
+        */
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) ==
+            PackageManager.PERMISSION_GRANTED) {
+            doFileStuff()
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                0
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.i("Hopium", "Did this work")
+        doFileStuff();
+    }
+    fun doFileStuff(){
         val btnLayout = findViewById(R.id.btnLayout) as LinearLayout
         val app = this.application as QuizApp
+        app.myRepository = JSONRepository()
         val myTopics = app.myRepository.getTopicNames()
         myTopics.iterator().forEach {
             var button = Button(this)
