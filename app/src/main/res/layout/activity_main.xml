@@ -13,6 +13,33 @@
         android:layout_height="match_parent"
         android:visibility="visible">
 
+        <LinearLayout
+            android:id="@+id/errorLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/errorLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Something went wrong. We recommend checking the questions.json file and granting all permissions necessary."
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/reloadBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reload" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/testModebtn"
             android:layout_width="wrap_content"
@@ -21,6 +48,7 @@
             android:layout_centerHorizontal="true"
             android:text="Test"
             android:visibility="invisible" />
+
     </RelativeLayout>
 
     <LinearLayout

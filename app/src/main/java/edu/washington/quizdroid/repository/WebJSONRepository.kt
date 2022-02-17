@@ -1,33 +1,41 @@
 package edu.washington.quizdroid.repository
 
+import android.os.Environment
 import android.util.JsonReader
 import android.util.Log
 import java.io.File
 import java.io.FileReader
 import java.io.IOException
+import java.io.InputStreamReader
+import java.net.URL
 
 
-class VariableFileRepository(override val topics: List<Topic>) : TopicRepository {
+class WebJSONRepository(override val topics: List<Topic>) : TopicRepository {
 
     constructor() : this(HardCodedRepository().topics)
-    constructor(myPathToAFile: String) : this(VariableFileRepository.initializeRepositoryOnInit(myPathToAFile))
+    constructor(myPathToAFile: String) : this(WebJSONRepository.initializeRepositoryOnInit(myPathToAFile))
 
     companion object {
-        private fun initializeRepositoryOnInit(filePath: String) : List<Topic> {
-            Log.i("VariableFileRepository", "Trying to make webjson")
+        fun initializeRepositoryOnInit(url: String) : List<Topic> {
+            Log.i("WebJSONRepository", "Trying to make webjson")
             val topicList = emptyList<Topic>().toMutableList()
             try {
-                Log.i("VariableFileRepository", "inside try catch")
-                //val readerOrWhatever = URL(url).openStream()
-                Log.i("VariableFileRepository", "before declaring reader")
-                //val reader = JsonReader(InputStreamReader(readerOrWhatever, "UTF-8"))
-                val reader = JsonReader(FileReader(File(filePath)))
+                Log.i("WebJSONRepository", "inside try catch")
+                val readerOrWhatever = URL(url).openStream()
+                Log.i("WebJSONRepository", "before declaring reader")
+                val reader = JsonReader(InputStreamReader(readerOrWhatever, "UTF-8"))
+                /*val reader = JsonReader(FileReader(
+                    File(
+                        Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                        .toString() + "/SampleFile.json")
+                ))*/
                 reader.beginArray()
                 val topicList = emptyList<Topic>().toMutableList()
-                Log.i("VariableFileRepository", "About to enter while")
+                Log.i("WebJSONRepository", "About to enter while")
                 while (reader.hasNext() && reader.peek().toString() != "END_ARRAY")
                 {
-                    Log.i("VariableFileRepository", "Iterating in while")
+                    Log.i("WebJSONRepository", "Iterating in while")
                     reader.beginObject()
                     var title = reader.nextName();
                     title = reader.nextString()
@@ -40,17 +48,17 @@ class VariableFileRepository(override val topics: List<Topic>) : TopicRepository
                 }
                 reader.endArray()
                 reader.close()
-                Log.i("VariableFileRepository", "Allegedly made it")
+                Log.i("WebJSONRepository", "Allegedly made it")
                 return topicList
             }
             catch (e: IOException) {
-                Log.e("VariableFileRepository", e.stackTraceToString())
+                Log.e("WebJSONRepository", e.stackTraceToString())
             }
 
             //val file = File("/storage/emulated/0/Download/questions.json") //File(filePath)
             //val reader = JsonReader(FileReader(file))
             //val directoryContents = file.list().joinToString(", ")
-            Log.i("VariableFileRepository", "Made a webjson")
+            Log.i("WebJSONRepository", "Made a webjson")
             return topicList
         }
 
